@@ -1,3 +1,5 @@
+/* Modal.css */
+
 .leetcode-modal-overlay {
   position: fixed;
   top: 0;
@@ -20,7 +22,7 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 1200px;
-  height: 600px; /* 🔹 Fixed height */
+  height: 90vh; /* 🔹 Fixed at 90% of screen height */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -102,6 +104,11 @@
   border-color: var(--leetcode-primary-orange);
 }
 
+.leetcode-modal-nav-btn:focus {
+  outline: 2px solid var(--leetcode-primary-orange);
+  outline-offset: 2px;
+}
+
 .leetcode-modal-font-controls {
   display: flex;
   align-items: center;
@@ -126,6 +133,11 @@
 .leetcode-modal-font-btn:hover {
   background: var(--leetcode-primary-orange);
   color: white;
+}
+
+.leetcode-modal-font-btn:focus {
+  outline: 2px solid var(--leetcode-primary-orange);
+  outline-offset: 2px;
 }
 
 .leetcode-modal-font-size {
@@ -175,6 +187,11 @@
   cursor: not-allowed;
 }
 
+.leetcode-modal-copy-btn:focus {
+  outline: 2px solid var(--leetcode-primary-orange);
+  outline-offset: 2px;
+}
+
 .leetcode-modal-close-btn {
   background: none;
   border: none;
@@ -199,7 +216,7 @@
   flex: 1;
   overflow: auto;
   padding: 1.5rem 2rem;
-  min-height: 400px; /* 🔹 Keep stable content area */
+  min-height: 0; /* keeps content scrollable */
 }
 
 .leetcode-modal-code-pre {
@@ -212,7 +229,7 @@
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   line-height: 1.6;
   transition: font-size 0.3s ease;
-  min-height: 100%; /* 🔹 Always fill space */
+  height: 100%; /* fill modal-content */
 }
 
 .leetcode-modal-code {
@@ -221,10 +238,15 @@
   word-wrap: break-word;
 }
 
-/* Scrollbars */
 .leetcode-modal-content::-webkit-scrollbar,
 .leetcode-modal-code-pre::-webkit-scrollbar {
   width: 8px;
+}
+
+.leetcode-modal-content::-webkit-scrollbar-track,
+.leetcode-modal-code-pre::-webkit-scrollbar-track {
+  background: var(--leetcode-bg-tertiary);
+  border-radius: 4px;
 }
 
 .leetcode-modal-content::-webkit-scrollbar-thumb,
@@ -238,18 +260,17 @@
   background: var(--leetcode-dark-orange);
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 1024px) {
   .leetcode-modal {
     max-width: 95vw;
-    height: 500px; /* smaller for tablets */
   }
 }
 
 @media (max-width: 768px) {
   .leetcode-modal {
     margin: 0.5rem;
-    height: 450px; /* smaller for mobile */
+    height: 95vh; /* keep tall modals on smaller screens */
   }
   
   .leetcode-modal-header {
@@ -271,10 +292,6 @@
 }
 
 @media (max-width: 480px) {
-  .leetcode-modal {
-    height: 400px; /* even smaller for small phones */
-  }
-
   .leetcode-modal-code-pre {
     padding: 1rem;
     font-size: 0.875rem;
