@@ -3,6 +3,7 @@ import "./styles/LeetCodeSolutions.css";
 
 export default function LeetCodeSolutions() {
   const [folders, setFolders] = useState([]);
+  const [filteredFolders, setFilteredFolders] = useState([]);
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [selectedSolution, setSelectedSolution] = useState(0);
   const [fileContent, setFileContent] = useState("");
@@ -10,10 +11,37 @@ export default function LeetCodeSolutions() {
   const [fontSize, setFontSize] = useState(100);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortOrder, setSortOrder] = useState('ascending');
 
   useEffect(() => {
     fetchSolutions();
   }, []);
+
+  useEffect(() => {
+    filterAndSortProblems();
+  }, [folders, searchTerm, sortOrder]);
+
+  function filterAndSortProblems() {
+    let filtered = folders.filter(folder =>
+      folder.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      folder.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    filtered.sort((a, b) => {
+      const aNum = parseInt(a.name.match(/\d+/)?.[0] || '0');
+      const bNum = parseInt(b.name.match(/\d+/)?.[0] || '0');
+      
+      if (sortOrder === 'ascending') {
+        return aNum - bNum;
+      } else {
+        return bNum - aNum;
+      }
+    });
+
+    setFilteredFolders(filtered);
+  }
 
   async function fetchSolutions() {
     const repo = "Shashidharak89/MY-LEETCODE-SOLUTIONS";
@@ -50,6 +78,7 @@ export default function LeetCodeSolutions() {
             .filter(f => f.name.endsWith(".java") || f.name.endsWith(".cpp") || f.name.endsWith(".py") || f.name.endsWith(".js"))
             .map(f => ({
               name: f.name,
+              displayName: f.name.replace(/\.(java|cpp|py|js)$/, ''),
               downloadUrl: f.download_url,
               language: f.name.split('.').pop()
             }));
@@ -80,6 +109,7 @@ export default function LeetCodeSolutions() {
     setSelectedProblem(problem);
     setSelectedSolution(solutionIndex);
     setFileContent("Loading...");
+    setShowModal(true);
     
     try {
       const file = problem.files[solutionIndex];
@@ -95,6 +125,12 @@ export default function LeetCodeSolutions() {
       console.error("Error loading file:", error);
       setFileContent("⚠️ Error loading file. Please try again.");
     }
+  }
+
+  function closeModal() {
+    setShowModal(false);
+    setSelectedProblem(null);
+    setFileContent("");
   }
 
   function copyToClipboard() {
@@ -133,6 +169,14 @@ export default function LeetCodeSolutions() {
     openSolution(selectedProblem, newIndex);
   }
 
+  function handleSearchChange(e) {
+    setSearchTerm(e.target.value);
+  }
+
+  function handleSortChange(order) {
+    setSortOrder(order);
+  }
+
   return (
     <div className={`leetcode-container ${theme}`}>
       <header className="leetcode-header">
@@ -154,151 +198,187 @@ export default function LeetCodeSolutions() {
       </header>
 
       <main className="leetcode-main">
-        <aside className="leetcode-sidebar">
-          <h2 className="leetcode-sidebar-title">Problems</h2>
-          {loading ? (
-            <div className="leetcode-loading">
-              <div className="leetcode-spinner"></div>
-              <p>Loading solutions...</p>
+        <div className="leetcode-content">
+          <div className="leetcode-controls">
+            <div className="leetcode-search-container">
+              <input
+                type="text"
+                placeholder="🔍 Search problems..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="leetcode-search-input"
+              />
             </div>
-          ) : error ? (
-            <div className="leetcode-error">
-              <p>{error}</p>
-              <button onClick={fetchSolutions} className="leetcode-retry-btn">
-                Retry
+            
+            <div className="leetcode-sort-container">
+              <span className="leetcode-sort-label">Sort:</span>
+              <button
+                onClick={() => handleSortChange('ascending')}
+                className={`leetcode-sort-btn ${sortOrder === 'ascending' ? 'active' : ''}`}
+              >
+                ↑ Ascending
+              </button>
+              <button
+                onClick={() => handleSortChange('descending')}
+                className={`leetcode-sort-btn ${sortOrder === 'descending' ? 'active' : ''}`}
+              >
+                ↓ Descending
               </button>
             </div>
-          ) : (
-            <div className="leetcode-problems-list">
-              {folders.map((folder, index) => (
-                <div key={folder.name} className="leetcode-problem-item">
-                  <h3 className="leetcode-problem-title">
-                    {index + 1}. {folder.displayName}
-                  </h3>
-                  <div className="leetcode-solutions">
-                    {folder.files.map((file, fileIndex) => (
-                      <button
-                        key={file.name}
-                        onClick={() => openSolution(folder, fileIndex)}
-                        className={`leetcode-solution-btn ${
-                          selectedProblem?.name === folder.name && selectedSolution === fileIndex
-                            ? 'active'
-                            : ''
-                        }`}
-                      >
-                        <span className="leetcode-solution-name">
-                          Solution {fileIndex + 1}
-                        </span>
-                        <span className="leetcode-solution-lang">
-                          .{file.language}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </aside>
+          </div>
 
-        <section className="leetcode-code-viewer">
-          {selectedProblem ? (
-            <>
-              <div className="leetcode-code-header">
-                <div className="leetcode-code-info">
-                  <h2 className="leetcode-code-title">
-                    {selectedProblem.displayName}
-                  </h2>
-                  <div className="leetcode-file-info">
-                    <span className="leetcode-filename">
-                      {selectedProblem.files[selectedSolution]?.name}
-                    </span>
-                    {selectedProblem.files.length > 1 && (
-                      <span className="leetcode-solution-counter">
-                        Solution {selectedSolution + 1} of {selectedProblem.files.length}
-                      </span>
-                    )}
+          <div className="leetcode-problems-grid">
+            {loading ? (
+              <div className="leetcode-loading">
+                <div className="leetcode-spinner"></div>
+                <p>Loading solutions...</p>
+              </div>
+            ) : error ? (
+              <div className="leetcode-error">
+                <p>{error}</p>
+                <button onClick={fetchSolutions} className="leetcode-retry-btn">
+                  Retry
+                </button>
+              </div>
+            ) : (
+              <>
+                {filteredFolders.length === 0 && searchTerm ? (
+                  <div className="leetcode-no-results">
+                    <h3>No problems found</h3>
+                    <p>Try adjusting your search terms</p>
                   </div>
-                </div>
-                
-                <div className="leetcode-code-controls">
-                  {selectedProblem.files.length > 1 && (
-                    <div className="leetcode-solution-nav">
-                      <button
-                        onClick={() => switchSolution('prev')}
-                        className="leetcode-nav-btn"
-                        title="Previous solution"
-                      >
-                        ←
-                      </button>
-                      <button
-                        onClick={() => switchSolution('next')}
-                        className="leetcode-nav-btn"
-                        title="Next solution"
-                      >
-                        →
-                      </button>
+                ) : (
+                  filteredFolders.map((folder, index) => (
+                    <div key={folder.name} className="leetcode-problem-card">
+                      <h3 className="leetcode-problem-title">
+                        {parseInt(folder.name.match(/\d+/)?.[0] || '0')}. {folder.displayName}
+                      </h3>
+                      <div className="leetcode-solutions-grid">
+                        {folder.files.map((file, fileIndex) => (
+                          <button
+                            key={file.name}
+                            onClick={() => openSolution(folder, fileIndex)}
+                            className="leetcode-solution-card"
+                          >
+                            <div className="leetcode-solution-info">
+                              <span className="leetcode-solution-filename">
+                                {file.displayName}
+                              </span>
+                              <span className="leetcode-solution-lang">
+                                .{file.language}
+                              </span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  )}
-                  
-                  <div className="leetcode-font-controls">
-                    <button
-                      onClick={decreaseFontSize}
-                      className="leetcode-font-btn"
-                      title="Decrease font size"
-                    >
-                      A−
-                    </button>
-                    <span className="leetcode-font-size">
-                      {fontSize}%
+                  ))
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </main>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="leetcode-modal-overlay" onClick={closeModal}>
+          <div className="leetcode-modal" onClick={e => e.stopPropagation()}>
+            <div className="leetcode-modal-header">
+              <div className="leetcode-modal-info">
+                <h2 className="leetcode-modal-title">
+                  {selectedProblem?.displayName}
+                </h2>
+                <div className="leetcode-modal-file-info">
+                  <span className="leetcode-modal-filename">
+                    {selectedProblem?.files[selectedSolution]?.name}
+                  </span>
+                  {selectedProblem?.files.length > 1 && (
+                    <span className="leetcode-modal-counter">
+                      {selectedSolution + 1} of {selectedProblem.files.length}
                     </span>
+                  )}
+                </div>
+              </div>
+              
+              <div className="leetcode-modal-controls">
+                {selectedProblem?.files.length > 1 && (
+                  <div className="leetcode-modal-nav">
                     <button
-                      onClick={increaseFontSize}
-                      className="leetcode-font-btn"
-                      title="Increase font size"
+                      onClick={() => switchSolution('prev')}
+                      className="leetcode-modal-nav-btn"
+                      title="Previous solution"
                     >
-                      A+
+                      ←
                     </button>
                     <button
-                      onClick={resetFontSize}
-                      className="leetcode-font-reset"
-                      title="Reset font size"
+                      onClick={() => switchSolution('next')}
+                      className="leetcode-modal-nav-btn"
+                      title="Next solution"
                     >
-                      Reset
+                      →
                     </button>
                   </div>
-                  
+                )}
+                
+                <div className="leetcode-modal-font-controls">
                   <button
-                    onClick={copyToClipboard}
-                    className="leetcode-copy-btn"
-                    disabled={!fileContent || fileContent === "Loading..." || fileContent.includes("⚠️")}
+                    onClick={decreaseFontSize}
+                    className="leetcode-modal-font-btn"
+                    title="Decrease font size"
                   >
-                    📋 Copy Code
+                    A−
+                  </button>
+                  <span className="leetcode-modal-font-size">
+                    {fontSize}%
+                  </span>
+                  <button
+                    onClick={increaseFontSize}
+                    className="leetcode-modal-font-btn"
+                    title="Increase font size"
+                  >
+                    A+
+                  </button>
+                  <button
+                    onClick={resetFontSize}
+                    className="leetcode-modal-font-reset"
+                    title="Reset font size"
+                  >
+                    Reset
                   </button>
                 </div>
-              </div>
-
-              <div className="leetcode-code-content">
-                <pre 
-                  className="leetcode-code-pre"
-                  style={{ fontSize: `${fontSize}%` }}
+                
+                <button
+                  onClick={copyToClipboard}
+                  className="leetcode-modal-copy-btn"
+                  disabled={!fileContent || fileContent === "Loading..." || fileContent.includes("⚠️")}
                 >
-                  <code className="leetcode-code">
-                    {fileContent}
-                  </code>
-                </pre>
-              </div>
-            </>
-          ) : (
-            <div className="leetcode-code-placeholder">
-              <div className="leetcode-placeholder-content">
-                <h3>👈 Select a problem to view the solution</h3>
-                <p>Choose any problem from the sidebar to see its code implementation.</p>
+                  📋 Copy
+                </button>
+                
+                <button
+                  onClick={closeModal}
+                  className="leetcode-modal-close-btn"
+                  title="Close modal"
+                >
+                  ×
+                </button>
               </div>
             </div>
-          )}
-        </section>
-      </main>
+
+            <div className="leetcode-modal-content">
+              <pre 
+                className="leetcode-modal-code-pre"
+                style={{ fontSize: `${fontSize}%` }}
+              >
+                <code className="leetcode-modal-code">
+                  {fileContent}
+                </code>
+              </pre>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
