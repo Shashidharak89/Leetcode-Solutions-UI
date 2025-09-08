@@ -1,12 +1,27 @@
-# React + Vite
+# 📘 MyLC-Sol (LeetCode Solutions Visualizer)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project provides a clean and interactive way to showcase my **LeetCode solutions**.  
+Instead of browsing plain folders and files, this web app renders them in a **visual and user-friendly UI**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- 📂 **Folder & File Structure**: Displays LeetCode problems in their respective folders.  
+- 📝 **Code Viewer**: Click any solution to view its content in a modal/editor-like UI.  
+- 📋 **Copy Code**: One-click copy button for every solution.  
+- 🌗 **Dark Mode / Light Mode**: Smooth theme switching with custom styling.  
+- ✨ **Responsive & Modern UI**: Built with React and styled for readability.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+- **Frontend**: React + Vite  
+- **Styling**: CSS with dark/light mode variables  
+- **Context API**: For managing state (open solutions, theme, etc.)  
+
+---
+
+## 📷 Demo Preview
+*(Add screenshots/gif of your project here once ready)*
+
+---
