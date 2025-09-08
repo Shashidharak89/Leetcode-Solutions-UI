@@ -21,7 +21,4 @@ Instead of browsing plain folders and files, this web app renders them in a **vi
 
 ---
 
-## 📷 Demo Preview
-*(Add screenshots/gif of your project here once ready)*
 
----
