@@ -1,210 +1,201 @@
 /* LeetCodeSolutions.css */
 
-/* CSS Variables for Theming */
+/* Theme Variables */
 :root {
-  --primary-orange: #ea580c;
-  --secondary-orange: #fed7aa;
-  --dark-orange: #c2410c;
-  --light-orange: #fff7ed;
-  --accent-orange: #fb923c;
+  --leetcode-primary-orange: #ff8c00;
+  --leetcode-secondary-orange: #ff6b35;
+  --leetcode-light-orange: #ffa94d;
+  --leetcode-dark-orange: #cc6600;
+  --leetcode-accent-orange: #ffb366;
 }
 
-/* Light Theme Variables */
-.leetcode-light {
-  --bg-primary: #ffffff;
-  --bg-secondary: #fff7ed;
-  --bg-tertiary: #fed7aa;
-  --text-primary: #1a1a1a;
-  --text-secondary: #7c2d12;
-  --text-accent: #c2410c;
-  --border-color: #fed7aa;
-  --shadow: rgba(234, 88, 12, 0.1);
-  --code-bg: #1a1a1a;
-  --code-text: #f8fafc;
-  --overlay: rgba(0, 0, 0, 0.5);
+.leetcode-container.light {
+  --leetcode-bg-primary: #ffffff;
+  --leetcode-bg-secondary: #f8f9fa;
+  --leetcode-bg-tertiary: #e9ecef;
+  --leetcode-text-primary: #212529;
+  --leetcode-text-secondary: #6c757d;
+  --leetcode-border: #dee2e6;
+  --leetcode-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --leetcode-shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --leetcode-code-bg: #2d3748;
+  --leetcode-code-text: #e2e8f0;
 }
 
-/* Dark Theme Variables */
-.leetcode-dark {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d1810;
-  --bg-tertiary: #3d2817;
-  --text-primary: #f8fafc;
-  --text-secondary: #fed7aa;
-  --text-accent: #fb923c;
-  --border-color: #3d2817;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --code-bg: #0f0f0f;
-  --code-text: #f1f5f9;
-  --overlay: rgba(0, 0, 0, 0.7);
+.leetcode-container.dark {
+  --leetcode-bg-primary: #1a202c;
+  --leetcode-bg-secondary: #2d3748;
+  --leetcode-bg-tertiary: #4a5568;
+  --leetcode-text-primary: #f7fafc;
+  --leetcode-text-secondary: #cbd5e0;
+  --leetcode-border: #4a5568;
+  --leetcode-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --leetcode-shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --leetcode-code-bg: #0d1117;
+  --leetcode-code-text: #f0f6fc;
 }
 
-/* Custom Scrollbar */
-.leetcode-custom-scroll::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.leetcode-custom-scroll::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-  border-radius: 4px;
-}
-
-.leetcode-custom-scroll::-webkit-scrollbar-thumb {
-  background: var(--primary-orange);
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-.leetcode-custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--dark-orange);
-}
-
-.leetcode-custom-scroll::-webkit-scrollbar-corner {
-  background: var(--bg-secondary);
-}
-
-/* Base Styles */
-* {
-  box-sizing: border-box;
-}
-
+/* Container */
 .leetcode-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px;
+  background-color: var(--leetcode-bg-primary);
+  color: var(--leetcode-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
   transition: all 0.3s ease;
-  color: var(--text-primary);
 }
 
-/* Header Styles */
+/* Header */
 .leetcode-header {
-  margin-bottom: 30px;
+  background: linear-gradient(135deg, var(--leetcode-primary-orange), var(--leetcode-secondary-orange));
+  padding: 1rem 2rem;
+  box-shadow: var(--leetcode-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .leetcode-header-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-.leetcode-title-section {
-  text-align: left;
+.leetcode-logo {
+  height: 40px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .leetcode-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-accent);
-  margin: 0 0 10px 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.leetcode-icon {
-  font-size: 2rem;
-}
-
-.leetcode-subtitle {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
+  color: white;
   margin: 0;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .leetcode-theme-toggle {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-color);
-  border-radius: 50px;
-  width: 60px;
-  height: 60px;
-  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 6px var(--shadow);
+  backdrop-filter: blur(10px);
 }
 
 .leetcode-theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px var(--shadow);
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
 }
 
-/* Controls */
-.leetcode-controls {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
+/* Main Layout */
+.leetcode-main {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 0;
   max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
-  flex-wrap: wrap;
+  margin: 0 auto;
+  min-height: calc(100vh - 80px);
 }
 
-.leetcode-search-container {
-  position: relative;
-  flex: 1;
-  min-width: 200px;
+/* Sidebar */
+.leetcode-sidebar {
+  background-color: var(--leetcode-bg-secondary);
+  border-right: 1px solid var(--leetcode-border);
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 80px);
 }
 
-.leetcode-search-input {
-  width: 100%;
-  padding: 12px 45px 12px 15px;
-  border: 2px solid var(--border-color);
-  border-radius: 25px;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-size: 1rem;
-  outline: none;
+.leetcode-sidebar-title {
+  color: var(--leetcode-primary-orange);
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--leetcode-primary-orange);
+}
+
+.leetcode-problems-list {
+  space-y: 1rem;
+}
+
+.leetcode-problem-item {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--leetcode-bg-primary);
+  border-radius: 12px;
+  box-shadow: var(--leetcode-shadow);
   transition: all 0.3s ease;
 }
 
-.leetcode-search-input:focus {
-  border-color: var(--primary-orange);
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+.leetcode-problem-item:hover {
+  box-shadow: var(--leetcode-shadow-hover);
+  transform: translateY(-2px);
 }
 
-.leetcode-search-icon {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-secondary);
-  font-size: 1.2rem;
+.leetcode-problem-title {
+  color: var(--leetcode-text-primary);
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-.leetcode-filter-container {
+.leetcode-solutions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.leetcode-solution-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--leetcode-bg-tertiary);
+  border: 1px solid var(--leetcode-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
 }
 
-.leetcode-filter-container label {
-  color: var(--text-secondary);
+.leetcode-solution-btn:hover {
+  background: var(--leetcode-light-orange);
+  color: white;
+  border-color: var(--leetcode-primary-orange);
+  transform: translateX(4px);
+}
+
+.leetcode-solution-btn.active {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border-color: var(--leetcode-dark-orange);
+  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.3);
+}
+
+.leetcode-solution-name {
+  font-weight: 500;
+}
+
+.leetcode-solution-lang {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
-.leetcode-sort-select {
-  padding: 8px 12px;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-size: 0.9rem;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.leetcode-sort-select:focus {
-  border-color: var(--primary-orange);
+.leetcode-solution-btn.active .leetcode-solution-lang {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Loading States */
@@ -212,19 +203,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  color: var(--text-accent);
+  padding: 2rem;
+  text-align: center;
 }
 
 .leetcode-spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid var(--bg-tertiary);
-  border-top: 4px solid var(--primary-orange);
+  border: 3px solid var(--leetcode-border);
+  border-top: 3px solid var(--leetcode-primary-orange);
   border-radius: 50%;
   animation: leetcode-spin 1s linear infinite;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 @keyframes leetcode-spin {
@@ -232,425 +222,347 @@
   100% { transform: rotate(360deg); }
 }
 
+/* Error States */
 .leetcode-error {
-  background: #fee2e2;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
-  padding: 30px;
+  padding: 1rem;
   text-align: center;
-  color: #dc2626;
-  max-width: 500px;
-  margin: 0 auto;
+  color: #e53e3e;
 }
 
-.leetcode-error h2 {
-  margin: 0 0 15px 0;
-  font-size: 1.5rem;
-}
-
-.leetcode-error p {
-  margin: 0;
-  font-size: 1rem;
-}
-
-/* Main Content */
-.leetcode-main {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.leetcode-no-results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.leetcode-no-results-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  opacity: 0.6;
-}
-
-.leetcode-no-results h3 {
-  color: var(--text-accent);
-  font-size: 1.5rem;
-  margin: 0 0 10px 0;
-}
-
-.leetcode-no-results p {
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.leetcode-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-}
-
-.leetcode-card {
-  background: var(--bg-primary);
-  border-radius: 16px;
-  box-shadow: 0 4px 6px var(--shadow);
-  border: 1px solid var(--border-color);
-  overflow: hidden;
+.leetcode-retry-btn {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
   transition: all 0.3s ease;
 }
 
-.leetcode-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px var(--shadow);
+.leetcode-retry-btn:hover {
+  background: var(--leetcode-dark-orange);
 }
 
-.leetcode-card-header {
-  background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
-  color: white;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.leetcode-card-title {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.leetcode-file-count {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.leetcode-card-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.leetcode-card-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.leetcode-card-content::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-  border-radius: 3px;
-}
-
-.leetcode-card-content::-webkit-scrollbar-thumb {
-  background: var(--secondary-orange);
-  border-radius: 3px;
-}
-
-.leetcode-solution-button {
-  width: 100%;
-  background: var(--bg-secondary);
-  border: 2px solid transparent;
-  padding: 12px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  text-align: left;
-}
-
-.leetcode-solution-button:hover {
-  background: var(--bg-tertiary);
-  border-color: var(--primary-orange);
-  color: var(--text-accent);
-  transform: translateX(4px);
-}
-
-.leetcode-file-icon {
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-
-.leetcode-file-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: 500;
-}
-
-/* Popup Modal */
-.leetcode-popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--overlay);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-  backdrop-filter: blur(4px);
-}
-
-.leetcode-popup-modal {
-  background: var(--bg-primary);
-  border-radius: 20px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-  max-width: 900px;
-  max-height: 80vh;
-  width: 100%;
+/* Code Viewer */
+.leetcode-code-viewer {
+  background-color: var(--leetcode-bg-primary);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 2px solid var(--border-color);
-  animation: leetcode-popup-enter 0.3s ease-out;
 }
 
-@keyframes leetcode-popup-enter {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+.leetcode-code-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--leetcode-border);
+  background: var(--leetcode-bg-secondary);
 }
 
-.leetcode-popup-header {
-  background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
-  color: white;
-  padding: 25px;
+.leetcode-code-info {
+  margin-bottom: 1rem;
+}
+
+.leetcode-code-title {
+  color: var(--leetcode-primary-orange);
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.leetcode-file-info {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 15px;
 }
 
-.leetcode-popup-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.leetcode-popup-title {
-  margin: 0 0 5px 0;
-  font-size: 1.4rem;
-  font-weight: 600;
-  word-break: break-all;
-}
-
-.leetcode-popup-type {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 400;
-}
-
-.leetcode-popup-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.leetcode-popup-copy {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+.leetcode-filename {
+  background: var(--leetcode-primary-orange);
   color: white;
-  padding: 10px 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
   font-weight: 500;
-  white-space: nowrap;
 }
 
-.leetcode-popup-copy:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+.leetcode-solution-counter {
+  color: var(--leetcode-text-secondary);
+  font-size: 0.875rem;
 }
 
-.leetcode-popup-copy:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.leetcode-code-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.leetcode-popup-close {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.leetcode-solution-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.leetcode-nav-btn {
+  background: var(--leetcode-bg-primary);
+  border: 1px solid var(--leetcode-border);
+  border-radius: 6px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.leetcode-popup-close:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+.leetcode-nav-btn:hover {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border-color: var(--leetcode-primary-orange);
 }
 
-.leetcode-popup-content {
-  flex: 1;
-  overflow: hidden;
+.leetcode-font-controls {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--leetcode-bg-primary);
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--leetcode-border);
 }
 
-.leetcode-popup-code {
-  flex: 1;
-  margin: 0;
-  background: var(--code-bg);
-  color: var(--code-text);
-  padding: 25px;
-  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  overflow: auto;
-  white-space: pre;
-  tab-size: 4;
-}
-
-.leetcode-popup-code::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-.leetcode-popup-code::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-}
-
-.leetcode-popup-code::-webkit-scrollbar-thumb {
-  background: var(--primary-orange);
-  border-radius: 6px;
-}
-
-.leetcode-popup-code::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-orange);
-}
-
-.leetcode-popup-code code {
+.leetcode-font-btn {
   background: none;
-  color: inherit;
-  font-family: inherit;
-  font-size: inherit;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  color: var(--leetcode-text-primary);
+}
+
+.leetcode-font-btn:hover {
+  background: var(--leetcode-primary-orange);
+  color: white;
+}
+
+.leetcode-font-size {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--leetcode-primary-orange);
+  min-width: 40px;
+  text-align: center;
+}
+
+.leetcode-font-reset {
+  background: var(--leetcode-bg-tertiary);
+  border: 1px solid var(--leetcode-border);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  color: var(--leetcode-text-secondary);
+}
+
+.leetcode-font-reset:hover {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border-color: var(--leetcode-primary-orange);
+}
+
+.leetcode-copy-btn {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.2);
+}
+
+.leetcode-copy-btn:hover:not(:disabled) {
+  background: var(--leetcode-dark-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 140, 0, 0.3);
+}
+
+.leetcode-copy-btn:disabled {
+  background: var(--leetcode-bg-tertiary);
+  color: var(--leetcode-text-secondary);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Code Content */
+.leetcode-code-content {
+  flex: 1;
+  overflow: auto;
+  padding: 1.5rem;
+}
+
+.leetcode-code-pre {
+  background-color: var(--leetcode-code-bg);
+  color: var(--leetcode-code-text);
+  padding: 1.5rem;
+  border-radius: 12px;
+  overflow: auto;
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  line-height: 1.6;
+  box-shadow: var(--leetcode-shadow);
+  transition: font-size 0.3s ease;
+}
+
+.leetcode-code {
+  display: block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Placeholder */
+.leetcode-code-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.leetcode-placeholder-content {
+  text-align: center;
+  color: var(--leetcode-text-secondary);
+}
+
+.leetcode-placeholder-content h3 {
+  color: var(--leetcode-primary-orange);
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.leetcode-placeholder-content p {
+  margin: 0;
+  font-size: 1rem;
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .leetcode-main {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-  .leetcode-container {
-    padding: 15px;
+  .leetcode-header {
+    padding: 1rem;
   }
   
   .leetcode-header-content {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
   
   .leetcode-title {
-    font-size: 2rem;
-    justify-content: center;
+    font-size: 1.25rem;
   }
   
-  .leetcode-controls {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 15px;
-  }
-  
-  .leetcode-filter-container {
-    justify-content: center;
-  }
-  
-  .leetcode-grid {
+  .leetcode-main {
     grid-template-columns: 1fr;
-    gap: 20px;
   }
   
-  .leetcode-popup-modal {
-    max-height: 90vh;
-    margin: 10px;
+  .leetcode-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--leetcode-border);
+    max-height: none;
+    padding: 1rem;
   }
   
-  .leetcode-popup-header {
+  .leetcode-code-header {
+    padding: 1rem;
+  }
+  
+  .leetcode-code-controls {
     flex-direction: column;
     align-items: stretch;
-    gap: 15px;
+    gap: 0.75rem;
   }
   
-  .leetcode-popup-actions {
-    justify-content: space-between;
+  .leetcode-solution-nav,
+  .leetcode-font-controls {
+    justify-content: center;
   }
   
-  .leetcode-popup-code {
-    font-size: 12px;
-    padding: 15px;
+  .leetcode-code-content {
+    padding: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .leetcode-container {
-    padding: 10px;
+  .leetcode-code-pre {
+    padding: 1rem;
+    font-size: 0.875rem;
   }
   
-  .leetcode-title {
-    font-size: 1.8rem;
+  .leetcode-file-info {
     flex-direction: column;
-    gap: 8px;
-  }
-  
-  .leetcode-subtitle {
-    font-size: 1rem;
-  }
-  
-  .leetcode-theme-toggle {
-    width: 50px;
-    height: 50px;
-    font-size: 1.3rem;
-  }
-  
-  .leetcode-search-input {
-    padding: 10px 40px 10px 12px;
-  }
-  
-  .leetcode-popup-overlay {
-    padding: 10px;
-  }
-  
-  .leetcode-popup-code {
-    font-size: 11px;
-    padding: 12px;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 }
 
-/* Focus styles for accessibility */
-.leetcode-solution-button:focus,
-.leetcode-popup-copy:focus,
-.leetcode-popup-close:focus,
+/* Scrollbar Styling */
+.leetcode-sidebar::-webkit-scrollbar,
+.leetcode-code-content::-webkit-scrollbar,
+.leetcode-code-pre::-webkit-scrollbar {
+  width: 8px;
+}
+
+.leetcode-sidebar::-webkit-scrollbar-track,
+.leetcode-code-content::-webkit-scrollbar-track,
+.leetcode-code-pre::-webkit-scrollbar-track {
+  background: var(--leetcode-bg-tertiary);
+  border-radius: 4px;
+}
+
+.leetcode-sidebar::-webkit-scrollbar-thumb,
+.leetcode-code-content::-webkit-scrollbar-thumb,
+.leetcode-code-pre::-webkit-scrollbar-thumb {
+  background: var(--leetcode-primary-orange);
+  border-radius: 4px;
+}
+
+.leetcode-sidebar::-webkit-scrollbar-thumb:hover,
+.leetcode-code-content::-webkit-scrollbar-thumb:hover,
+.leetcode-code-pre::-webkit-scrollbar-thumb:hover {
+  background: var(--leetcode-dark-orange);
+}
+
+/* Focus Styles */
+.leetcode-solution-btn:focus,
+.leetcode-nav-btn:focus,
+.leetcode-font-btn:focus,
+.leetcode-copy-btn:focus,
 .leetcode-theme-toggle:focus {
-  outline: 2px solid var(--primary-orange);
+  outline: 2px solid var(--leetcode-primary-orange);
   outline-offset: 2px;
 }
 
-.leetcode-search-input:focus,
-.leetcode-sort-select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+/* Animation for problem items */
+.leetcode-problem-item {
+  animation: leetcode-fadeInUp 0.3s ease-out;
+}
+
+@keyframes leetcode-fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
