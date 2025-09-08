@@ -1,6 +1,6 @@
 /* Dashboard.css - Main theme variables and container styles */
 
-/* Theme Variables */
+/* Global Colors */
 :root {
   --leetcode-primary-orange: #ff8c00;
   --leetcode-secondary-orange: #ff6b35;
@@ -9,7 +9,8 @@
   --leetcode-accent-orange: #ffb366;
 }
 
-.leetcode-container.light {
+/* Light theme variables */
+.light {
   --leetcode-bg-primary: #ffffff;
   --leetcode-bg-secondary: #f8f9fa;
   --leetcode-bg-tertiary: #e9ecef;
@@ -22,7 +23,8 @@
   --leetcode-code-text: #e2e8f0;
 }
 
-.leetcode-container.dark {
+/* Dark theme variables */
+.dark {
   --leetcode-bg-primary: #1a202c;
   --leetcode-bg-secondary: #2d3748;
   --leetcode-bg-tertiary: #4a5568;
@@ -35,13 +37,22 @@
   --leetcode-code-text: #f0f6fc;
 }
 
+/* Body styling picks up theme */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+  background: var(--leetcode-bg-primary);
+  color: var(--leetcode-text-primary);
+}
+
 /* Container */
 .leetcode-container {
   min-height: 100vh;
   background-color: var(--leetcode-bg-primary);
   color: var(--leetcode-text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  line-height: 1.6;
   transition: all 0.3s ease;
 }
 
