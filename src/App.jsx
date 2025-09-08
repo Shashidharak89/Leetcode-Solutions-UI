@@ -1,10 +1,11 @@
+import LeetCodeSolutions from "./components/LeetCodeSolutions"
 
 
 function App() {
 
   return (
     <>
-   <p>Hello</p>
+   <LeetCodeSolutions/>
     </>
   )
 }
