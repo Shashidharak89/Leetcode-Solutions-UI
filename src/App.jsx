@@ -1,11 +1,12 @@
-import LeetCodeSolutions from "./components/LeetCodeSolutions"
+import Dashboard from "./components/Dashboard"
 
 
 function App() {
 
   return (
     <>
-   <LeetCodeSolutions/>
+   
+   <Dashboard/>
     </>
   )
 }

@@ -1,0 +1,82 @@
+/* ProblemCard.css */
+
+.leetcode-problem-card {
+  background: var(--leetcode-bg-secondary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--leetcode-shadow);
+  transition: all 0.3s ease;
+  border: 1px solid var(--leetcode-border);
+  animation: leetcode-fadeInUp 0.3s ease-out;
+}
+
+.leetcode-problem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--leetcode-shadow-hover);
+}
+
+.leetcode-problem-title {
+  color: var(--leetcode-text-primary);
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.leetcode-solutions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.leetcode-solution-card {
+  background: var(--leetcode-bg-primary);
+  border: 1px solid var(--leetcode-border);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.leetcode-solution-card:hover {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border-color: var(--leetcode-dark-orange);
+  transform: translateX(4px);
+}
+
+.leetcode-solution-card:focus {
+  outline: 2px solid var(--leetcode-primary-orange);
+  outline-offset: 2px;
+}
+
+.leetcode-solution-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.leetcode-solution-filename {
+  font-weight: 500;
+  font-size: 0.9rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leetcode-solution-lang {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.leetcode-solution-card:hover .leetcode-solution-lang {
+  background: rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,17 @@
+/* NoResults.css */
+
+.leetcode-no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--leetcode-text-secondary);
+}
+
+.leetcode-no-results h3 {
+  color: var(--leetcode-primary-orange);
+  margin: 0 0 0.5rem 0;
+}
+
+.leetcode-no-results p {
+  margin: 0;
+}

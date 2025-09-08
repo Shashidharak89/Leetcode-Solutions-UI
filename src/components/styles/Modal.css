@@ -1,0 +1,304 @@
+/* Modal.css */
+
+.leetcode-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: leetcode-fadeIn 0.3s ease-out;
+}
+
+.leetcode-modal {
+  background: var(--leetcode-bg-primary);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: leetcode-slideUp 0.3s ease-out;
+}
+
+.leetcode-modal-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--leetcode-border);
+  background: var(--leetcode-bg-secondary);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.leetcode-modal-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.leetcode-modal-title {
+  color: var(--leetcode-primary-orange);
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.leetcode-modal-file-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.leetcode-modal-filename {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.leetcode-modal-counter {
+  color: var(--leetcode-text-secondary);
+  font-size: 0.875rem;
+}
+
+.leetcode-modal-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.leetcode-modal-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.leetcode-modal-nav-btn {
+  background: var(--leetcode-bg-primary);
+  border: 1px solid var(--leetcode-border);
+  border-radius: 6px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.leetcode-modal-nav-btn:hover {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border-color: var(--leetcode-primary-orange);
+}
+
+.leetcode-modal-nav-btn:focus {
+  outline: 2px solid var(--leetcode-primary-orange);
+  outline-offset: 2px;
+}
+
+.leetcode-modal-font-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--leetcode-bg-primary);
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--leetcode-border);
+}
+
+.leetcode-modal-font-btn {
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  color: var(--leetcode-text-primary);
+}
+
+.leetcode-modal-font-btn:hover {
+  background: var(--leetcode-primary-orange);
+  color: white;
+}
+
+.leetcode-modal-font-btn:focus {
+  outline: 2px solid var(--leetcode-primary-orange);
+  outline-offset: 2px;
+}
+
+.leetcode-modal-font-size {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--leetcode-primary-orange);
+  min-width: 40px;
+  text-align: center;
+}
+
+.leetcode-modal-font-reset {
+  background: var(--leetcode-bg-tertiary);
+  border: 1px solid var(--leetcode-border);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  color: var(--leetcode-text-secondary);
+}
+
+.leetcode-modal-font-reset:hover {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border-color: var(--leetcode-primary-orange);
+}
+
+.leetcode-modal-copy-btn {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+}
+
+.leetcode-modal-copy-btn:hover:not(:disabled) {
+  background: var(--leetcode-dark-orange);
+}
+
+.leetcode-modal-copy-btn:disabled {
+  background: var(--leetcode-bg-tertiary);
+  color: var(--leetcode-text-secondary);
+  cursor: not-allowed;
+}
+
+.leetcode-modal-copy-btn:focus {
+  outline: 2px solid var(--leetcode-primary-orange);
+  outline-offset: 2px;
+}
+
+.leetcode-modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  color: var(--leetcode-text-secondary);
+}
+
+.leetcode-modal-close-btn:hover {
+  background: #e53e3e;
+  color: white;
+}
+
+.leetcode-modal-content {
+  flex: 1;
+  overflow: auto;
+  padding: 1.5rem 2rem;
+}
+
+.leetcode-modal-code-pre {
+  background-color: var(--leetcode-code-bg);
+  color: var(--leetcode-code-text);
+  padding: 1.5rem;
+  border-radius: 12px;
+  overflow: auto;
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  line-height: 1.6;
+  transition: font-size 0.3s ease;
+  min-height: 300px;
+}
+
+.leetcode-modal-code {
+  display: block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.leetcode-modal-content::-webkit-scrollbar,
+.leetcode-modal-code-pre::-webkit-scrollbar {
+  width: 8px;
+}
+
+.leetcode-modal-content::-webkit-scrollbar-track,
+.leetcode-modal-code-pre::-webkit-scrollbar-track {
+  background: var(--leetcode-bg-tertiary);
+  border-radius: 4px;
+}
+
+.leetcode-modal-content::-webkit-scrollbar-thumb,
+.leetcode-modal-code-pre::-webkit-scrollbar-thumb {
+  background: var(--leetcode-primary-orange);
+  border-radius: 4px;
+}
+
+.leetcode-modal-content::-webkit-scrollbar-thumb:hover,
+.leetcode-modal-code-pre::-webkit-scrollbar-thumb:hover {
+  background: var(--leetcode-dark-orange);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .leetcode-modal {
+    max-width: 95vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .leetcode-modal {
+    margin: 0.5rem;
+    max-height: 95vh;
+  }
+  
+  .leetcode-modal-header {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .leetcode-modal-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .leetcode-modal-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .leetcode-modal-code-pre {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .leetcode-modal-file-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

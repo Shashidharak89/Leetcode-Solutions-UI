@@ -1,0 +1,71 @@
+/* Header.css */
+
+.leetcode-header {
+  background: linear-gradient(135deg, var(--leetcode-primary-orange), var(--leetcode-secondary-orange));
+  padding: 1rem 2rem;
+  box-shadow: var(--leetcode-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.leetcode-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.leetcode-logo {
+  height: 40px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leetcode-title {
+  color: white;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.leetcode-theme-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.leetcode-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.leetcode-theme-toggle:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .leetcode-header {
+    padding: 1rem;
+  }
+  
+  .leetcode-header-content {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .leetcode-title {
+    font-size: 1.25rem;
+  }
+}

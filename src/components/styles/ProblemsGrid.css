@@ -1,0 +1,21 @@
+/* ProblemsGrid.css */
+
+.leetcode-problems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .leetcode-problems-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .leetcode-problems-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
