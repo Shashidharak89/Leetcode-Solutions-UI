@@ -14,14 +14,18 @@ const Modal = () => {
     switchSolution,
     increaseFontSize,
     decreaseFontSize,
-    resetFontSize
+    resetFontSize,
+    theme
   } = useLeetCode();
 
   if (!showModal) return null;
 
   return (
     <div className="leetcode-modal-overlay" onClick={closeModal}>
-      <div className="leetcode-modal" onClick={e => e.stopPropagation()}>
+      <div
+        className={`leetcode-modal ${theme}`} // 🔹 theme-aware
+        onClick={e => e.stopPropagation()}
+      >
         <div className="leetcode-modal-header">
           <div className="leetcode-modal-info">
             <h2 className="leetcode-modal-title">
