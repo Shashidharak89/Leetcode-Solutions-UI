@@ -1,5 +1,42 @@
-/* ProblemCard.css */
+/* Global font + theme setup */
+:root {
+  --leetcode-font: 'Inter', 'Segoe UI', Roboto, sans-serif;
 
+  /* Light mode */
+  --leetcode-bg-primary: #ffffff;
+  --leetcode-bg-secondary: #f8f9fa;
+  --leetcode-text-primary: #1e1e1e;
+  --leetcode-border: #e0e0e0;
+  --leetcode-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  --leetcode-shadow-hover: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+  --leetcode-primary-orange: #ffa116;
+  --leetcode-dark-orange: #e69500;
+}
+
+/* Dark mode */
+[data-theme='dark'] {
+  --leetcode-bg-primary: #1c1c1c;
+  --leetcode-bg-secondary: #2a2a2a;
+  --leetcode-text-primary: #f5f5f5;
+  --leetcode-border: #3a3a3a;
+  --leetcode-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --leetcode-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.6);
+
+  --leetcode-primary-orange: #ffa116;
+  --leetcode-dark-orange: #cc7a00;
+}
+
+/* Apply font everywhere */
+.leetcode-problem-card,
+.leetcode-solution-card,
+.leetcode-problem-title,
+.leetcode-solution-filename,
+.leetcode-solution-lang {
+  font-family: var(--leetcode-font);
+}
+
+/* Component styles */
 .leetcode-problem-card {
   background: var(--leetcode-bg-secondary);
   border-radius: 12px;
@@ -38,6 +75,7 @@
   transition: all 0.3s ease;
   text-align: left;
   width: 100%;
+  color: var(--leetcode-text-primary);
 }
 
 .leetcode-solution-card:hover {
