@@ -14,6 +14,12 @@ const DashboardContent = () => {
     fetchSolutions();
   }, []);
 
+  // Sync theme with <body> class
+  useEffect(() => {
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
+  }, [theme]);
+
   return (
     <div className={`leetcode-container ${theme}`}>
       <Header />
