@@ -89,7 +89,7 @@
 
 .lc-search-input-enhanced {
   width: 100%;
-  padding: 1rem 1rem 1rem 3rem;
+  padding: 1rem 80px 1rem 3rem;
   border: 2px solid var(--lc-border-enhanced);
   border-radius: 12px;
   background: var(--lc-bg-secondary-enhanced);
@@ -118,7 +118,143 @@
   transform: scale(1.1);
 }
 
-/* Sort Section */
+/* Search Icons Container */
+.lc-search-icons-container-enhanced {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Mobile Filter Button */
+.lc-mobile-filter-enhanced {
+  position: relative;
+  display: block;
+}
+
+.lc-filter-btn-enhanced {
+  background: var(--lc-bg-primary-enhanced);
+  border: 2px solid var(--lc-border-enhanced);
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--lc-text-secondary-enhanced);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  min-width: 36px;
+}
+
+.lc-filter-btn-enhanced:hover {
+  border-color: var(--lc-orange-primary-enhanced);
+  color: var(--lc-orange-primary-enhanced);
+  background: var(--lc-orange-bg-enhanced);
+}
+
+.lc-filter-btn-enhanced.lc-active-enhanced {
+  background: var(--lc-orange-primary-enhanced);
+  border-color: var(--lc-orange-dark-enhanced);
+  color: white;
+}
+
+.lc-filter-dropdown-enhanced {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--lc-bg-primary-enhanced);
+  border: 2px solid var(--lc-border-enhanced);
+  border-radius: 12px;
+  box-shadow: var(--lc-shadow-lg-enhanced);
+  min-width: 160px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lc-filter-dropdown-enhanced.lc-visible-enhanced {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lc-filter-option-enhanced {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--lc-text-primary-enhanced);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  margin: 0.25rem;
+}
+
+.lc-filter-option-enhanced:hover {
+  background: var(--lc-orange-bg-enhanced);
+  color: var(--lc-orange-dark-enhanced);
+}
+
+.lc-filter-option-enhanced.lc-selected-enhanced {
+  background: var(--lc-orange-primary-enhanced);
+  color: white;
+}
+
+.lc-filter-option-enhanced:first-child {
+  border-radius: 10px 10px 8px 8px;
+}
+
+.lc-filter-option-enhanced:last-child {
+  border-radius: 8px 8px 10px 10px;
+}
+
+.lc-filter-arrow-enhanced {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Search Bar Repo Toggle (V Icon in Search Bar) */
+.lc-search-repo-toggle-enhanced {
+  background: var(--lc-bg-primary-enhanced);
+  border: 2px solid var(--lc-border-enhanced);
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--lc-text-secondary-enhanced);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  min-width: 36px;
+  position: relative;
+}
+
+.lc-search-repo-toggle-enhanced:hover {
+  border-color: var(--lc-orange-primary-enhanced);
+  color: var(--lc-orange-primary-enhanced);
+  background: var(--lc-orange-bg-enhanced);
+}
+
+.lc-search-repo-toggle-enhanced.lc-active-enhanced {
+  background: var(--lc-orange-primary-enhanced);
+  border-color: var(--lc-orange-dark-enhanced);
+  color: white;
+}
+
+/* Sort Section - Desktop */
 .lc-sort-wrapper-enhanced {
   display: flex;
   align-items: center;
@@ -180,8 +316,8 @@
   transition: opacity 0.3s ease;
 }
 
-/* Repo Toggle Button */
-.lc-repo-toggle-enhanced {
+/* Desktop Repo Toggle Button */
+.lc-desktop-repo-toggle-enhanced {
   background: var(--lc-bg-secondary-enhanced);
   border: 2px solid var(--lc-border-enhanced);
   padding: 0.75rem;
@@ -197,13 +333,13 @@
   min-width: 44px;
 }
 
-.lc-repo-toggle-enhanced:hover {
+.lc-desktop-repo-toggle-enhanced:hover {
   border-color: var(--lc-orange-primary-enhanced);
   color: var(--lc-orange-primary-enhanced);
   background: var(--lc-orange-bg-enhanced);
 }
 
-.lc-repo-toggle-enhanced.lc-active-enhanced {
+.lc-desktop-repo-toggle-enhanced.lc-active-enhanced {
   background: var(--lc-orange-primary-enhanced);
   border-color: var(--lc-orange-dark-enhanced);
   color: white;
@@ -234,7 +370,7 @@
   z-index: 10;
 }
 
-.lc-repo-toggle-enhanced:hover .lc-repo-tooltip-enhanced {
+.lc-desktop-repo-toggle-enhanced:hover .lc-repo-tooltip-enhanced {
   opacity: 1;
 }
 
@@ -344,46 +480,104 @@
   gap: 0.5rem;
 }
 
+/* Enhanced Save and Delete Button Styles */
 .lc-repo-submit-enhanced,
 .lc-repo-delete-enhanced {
-  background: var(--lc-orange-primary-enhanced);
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   padding: 1rem;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 0.95rem;
   font-weight: 600;
-  min-width: 44px;
   min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-width: 44px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--lc-shadow-enhanced);
 }
 
+/* Save Button - Orange Theme */
+.lc-repo-submit-enhanced {
+  background: var(--lc-orange-primary-enhanced);
+  color: white;
+  border: 2px solid var(--lc-orange-primary-enhanced);
+}
+
+.lc-repo-submit-enhanced:hover:not(:disabled) {
+  background: var(--lc-orange-dark-enhanced);
+  border-color: var(--lc-orange-dark-enhanced);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+}
+
+.lc-repo-submit-enhanced:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(255, 140, 0, 0.3);
+}
+
+.lc-repo-submit-enhanced:focus:not(:disabled) {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--lc-orange-bg-enhanced), 0 6px 20px rgba(255, 140, 0, 0.4);
+}
+
+/* Delete Button - Red Theme */
 .lc-repo-delete-enhanced {
   background: var(--lc-error-enhanced);
+  color: white;
+  border: 2px solid var(--lc-error-enhanced);
 }
 
-.lc-repo-submit-enhanced:hover {
-  background: var(--lc-orange-dark-enhanced);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
-}
-
-.lc-repo-delete-enhanced:hover {
+.lc-repo-delete-enhanced:hover:not(:disabled) {
   background: #dc2626;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  border-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
 }
 
+.lc-repo-delete-enhanced:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+}
+
+.lc-repo-delete-enhanced:focus:not(:disabled) {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2), 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* Disabled State for Both Buttons */
 .lc-repo-submit-enhanced:disabled,
 .lc-repo-delete-enhanced:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
+  box-shadow: var(--lc-shadow-enhanced);
+  background: var(--lc-text-muted-enhanced);
+  border-color: var(--lc-text-muted-enhanced);
+}
+
+/* Loading State Enhancement */
+.lc-repo-submit-enhanced.lc-loading-enhanced {
+  cursor: wait;
+  pointer-events: none;
+}
+
+.lc-repo-submit-enhanced.lc-loading-enhanced:hover {
+  transform: none;
+  box-shadow: var(--lc-shadow-enhanced);
+}
+
+/* Button Icon Spacing */
+.lc-repo-submit-enhanced svg,
+.lc-repo-delete-enhanced svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lc-repo-submit-enhanced:hover:not(:disabled) svg,
+.lc-repo-delete-enhanced:hover:not(:disabled) svg {
+  transform: scale(1.1);
 }
 
 /* Loading Spinner */
@@ -462,32 +656,39 @@
 .lc-confirm-delete-btn-enhanced {
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 44px;
+  box-shadow: var(--lc-shadow-enhanced);
 }
 
 .lc-cancel-btn-enhanced {
   background: var(--lc-bg-secondary-enhanced);
   color: var(--lc-text-secondary-enhanced);
-  border: 1px solid var(--lc-border-enhanced);
+  border: 2px solid var(--lc-border-enhanced);
 }
 
 .lc-confirm-delete-btn-enhanced {
   background: var(--lc-error-enhanced);
   color: white;
+  border: 2px solid var(--lc-error-enhanced);
 }
 
 .lc-cancel-btn-enhanced:hover {
   background: var(--lc-bg-tertiary-enhanced);
   color: var(--lc-text-primary-enhanced);
+  border-color: var(--lc-border-hover-enhanced);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .lc-confirm-delete-btn-enhanced:hover {
   background: #dc2626;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  border-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
 }
 
 @keyframes fadeInEnhanced {
@@ -533,37 +734,34 @@
     max-width: none;
     order: 1;
   }
+
+  /* Ensure both icons are visible on mobile */
+  .lc-search-input-enhanced {
+    padding-right: 80px;
+  }
   
+  /* Hide desktop sort section on mobile */
   .lc-sort-wrapper-enhanced {
     order: 2;
     background: var(--lc-bg-secondary-enhanced);
     border-radius: 12px;
     padding: 1rem;
     border: 1px solid var(--lc-border-enhanced);
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
-  
+
   .lc-sort-label-enhanced {
-    margin-bottom: 0.75rem;
-    width: 100%;
-    text-align: center;
-    font-weight: 600;
-    color: var(--lc-text-primary-enhanced);
+    display: none;
   }
-  
+
   .lc-sort-buttons-enhanced {
-    flex: 1;
-    justify-content: center;
+    display: none;
   }
-  
-  .lc-sort-btn-enhanced {
-    flex: 1;
-    justify-content: center;
-  }
-  
-  .lc-repo-toggle-enhanced {
-    margin-left: 1rem;
+
+  /* Hide desktop repo toggle on mobile since it's in search bar */
+  .lc-desktop-repo-toggle-enhanced {
+    display: none;
   }
 }
 
@@ -571,15 +769,6 @@
   .lc-sort-wrapper-enhanced {
     flex-direction: column;
     align-items: stretch;
-  }
-  
-  .lc-sort-buttons-enhanced {
-    margin-bottom: 1rem;
-  }
-  
-  .lc-repo-toggle-enhanced {
-    margin: 0;
-    align-self: center;
   }
 }
 
@@ -591,27 +780,13 @@
   }
   
   .lc-search-input-enhanced {
-    padding: 1rem 1rem 1rem 3rem;
+    padding: 1rem 80px 1rem 3rem;
     font-size: 16px; /* Prevents zoom on iOS */
     border-radius: 12px;
   }
   
   .lc-sort-wrapper-enhanced {
     padding: 0.875rem;
-  }
-  
-  .lc-sort-btn-enhanced {
-    padding: 0.75rem 0.5rem;
-    font-size: 0.875rem;
-    gap: 0.25rem;
-  }
-  
-  .lc-sort-text-enhanced {
-    display: none;
-  }
-  
-  .lc-sort-arrow-enhanced {
-    font-size: 1.25rem;
   }
   
   .lc-repo-content-enhanced {
@@ -657,27 +832,54 @@
   .lc-confirm-delete-btn-enhanced {
     width: 100%;
   }
+
+  .lc-filter-dropdown-enhanced {
+    min-width: 140px;
+  }
+
+  .lc-filter-option-enhanced {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  /* Adjust icon container spacing on mobile */
+  .lc-search-icons-container-enhanced {
+    gap: 3px;
+  }
+
+  .lc-filter-btn-enhanced,
+  .lc-search-repo-toggle-enhanced {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0.4rem;
+  }
 }
 
 @media (max-width: 380px) {
-  .lc-sort-buttons-enhanced {
-    padding: 2px;
+  .lc-filter-btn-enhanced,
+  .lc-search-repo-toggle-enhanced {
+    min-width: 30px;
+    min-height: 30px;
+    padding: 0.35rem;
   }
-  
-  .lc-sort-btn-enhanced {
-    padding: 0.5rem 0.25rem;
-    min-width: 44px;
+
+  .lc-search-icons-container-enhanced {
+    gap: 2px;
   }
-  
-  .lc-repo-toggle-enhanced {
-    min-width: 40px;
-    min-height: 40px;
-    padding: 0.5rem;
+
+  .lc-search-input-enhanced {
+    padding-right: 70px;
   }
-  
-  .lc-chevron-enhanced {
-    width: 16px;
-    height: 16px;
+
+  .lc-filter-dropdown-enhanced {
+    min-width: 130px;
+    right: -5px;
+  }
+
+  .lc-filter-option-enhanced {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+    gap: 0.4rem;
   }
 }
 
@@ -687,17 +889,29 @@
     transform: scale(0.98);
   }
   
-  .lc-repo-toggle-enhanced:active {
+  .lc-desktop-repo-toggle-enhanced:active,
+  .lc-search-repo-toggle-enhanced:active {
     transform: scale(0.95);
   }
   
-  .lc-repo-submit-enhanced:active,
-  .lc-repo-delete-enhanced:active {
+  .lc-repo-submit-enhanced:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  
+  .lc-repo-delete-enhanced:active:not(:disabled) {
     transform: scale(0.98);
   }
   
   .lc-cancel-btn-enhanced:active,
   .lc-confirm-delete-btn-enhanced:active {
+    transform: scale(0.98);
+  }
+
+  .lc-filter-btn-enhanced:active {
+    transform: scale(0.95);
+  }
+
+  .lc-filter-option-enhanced:active {
     transform: scale(0.98);
   }
 }
@@ -709,15 +923,17 @@
   }
   
   .lc-sort-btn-enhanced,
-  .lc-repo-toggle-enhanced,
+  .lc-desktop-repo-toggle-enhanced,
+  .lc-search-repo-toggle-enhanced,
   .lc-search-input-enhanced,
-  .lc-repo-input-enhanced {
+  .lc-repo-input-enhanced,
+  .lc-filter-btn-enhanced {
     border-width: 2px;
   }
   
   .lc-repo-submit-enhanced,
   .lc-repo-delete-enhanced {
-    border: 2px solid transparent;
+    border-width: 2px;
   }
   
   .lc-repo-submit-enhanced:focus,
@@ -731,12 +947,16 @@
   .lc-controls-enhanced,
   .lc-search-input-enhanced,
   .lc-sort-btn-enhanced,
-  .lc-repo-toggle-enhanced,
+  .lc-desktop-repo-toggle-enhanced,
+  .lc-search-repo-toggle-enhanced,
   .lc-repo-submit-enhanced,
   .lc-repo-delete-enhanced,
   .lc-chevron-enhanced,
   .lc-repo-dropdown-enhanced,
-  .lc-spinner-enhanced {
+  .lc-spinner-enhanced,
+  .lc-filter-btn-enhanced,
+  .lc-filter-dropdown-enhanced,
+  .lc-filter-option-enhanced {
     animation: none;
     transition: none;
   }

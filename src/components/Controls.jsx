@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLeetCode } from '../context/LeetcodeContext';
-import { FiChevronDown, FiSearch, FiTrash2, FiSave } from 'react-icons/fi';
+import { FiChevronDown, FiSearch, FiTrash2, FiSave, FiFilter } from 'react-icons/fi';
 import './styles/Controls.css';
 
 const Controls = () => {
@@ -18,6 +18,7 @@ const Controls = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
   // Load existing repo when component mounts or dropdown opens
   useEffect(() => {
@@ -92,6 +93,11 @@ const Controls = () => {
     setShowDeleteConfirm(false);
   };
 
+  const handleFilterSelect = (order) => {
+    handleSortChange(order);
+    setShowFilterDropdown(false);
+  };
+
   return (
     <div className={`lc-controls-enhanced ${theme}`}>
       <div className="lc-controls-main-enhanced">
@@ -106,42 +112,55 @@ const Controls = () => {
               onChange={handleSearchChange}
               className="lc-search-input-enhanced"
             />
+            
+            {/* Search Bar Right Icons Container */}
+            <div className="lc-search-icons-container-enhanced">
+              {/* Mobile Filter Button */}
+              <div className="lc-mobile-filter-enhanced">
+                <button
+                  onClick={() => setShowFilterDropdown(!showFilterDropdown)}
+                  className={`lc-filter-btn-enhanced ${showFilterDropdown ? 'lc-active-enhanced' : ''}`}
+                  aria-label="Sort options"
+                >
+                  <FiFilter size={18} />
+                </button>
+                
+                {/* Filter Dropdown */}
+                <div className={`lc-filter-dropdown-enhanced ${showFilterDropdown ? 'lc-visible-enhanced' : ''}`}>
+                  <button
+                    onClick={() => handleFilterSelect('ascending')}
+                    className={`lc-filter-option-enhanced ${sortOrder === 'ascending' ? 'lc-selected-enhanced' : ''}`}
+                  >
+                    <span className="lc-filter-arrow-enhanced">↑</span>
+                    Ascending
+                  </button>
+                  <button
+                    onClick={() => handleFilterSelect('descending')}
+                    className={`lc-filter-option-enhanced ${sortOrder === 'descending' ? 'lc-selected-enhanced' : ''}`}
+                  >
+                    <span className="lc-filter-arrow-enhanced">↓</span>
+                    Descending
+                  </button>
+                </div>
+              </div>
+
+              {/* Repository V Icon Button */}
+              <button
+                className={`lc-repo-toggle-enhanced lc-search-repo-toggle-enhanced ${showRepoInput ? 'lc-active-enhanced' : ''}`}
+                onClick={() => setShowRepoInput(!showRepoInput)}
+                aria-label="Toggle repository settings"
+              >
+                <FiChevronDown 
+                  className={`lc-chevron-enhanced ${showRepoInput ? 'lc-rotated-enhanced' : ''}`} 
+                  size={18} 
+                />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Sort Section */}
-        <div className="lc-sort-wrapper-enhanced">
-          <span className="lc-sort-label-enhanced">Sort by:</span>
-          <div className="lc-sort-buttons-enhanced">
-            <button
-              onClick={() => handleSortChange('ascending')}
-              className={`lc-sort-btn-enhanced ${sortOrder === 'ascending' ? 'lc-active-enhanced' : ''}`}
-            >
-              <span className="lc-sort-arrow-enhanced">↑</span>
-              <span className="lc-sort-text-enhanced">Ascending</span>
-            </button>
-            <button
-              onClick={() => handleSortChange('descending')}
-              className={`lc-sort-btn-enhanced ${sortOrder === 'descending' ? 'lc-active-enhanced' : ''}`}
-            >
-              <span className="lc-sort-arrow-enhanced">↓</span>
-              <span className="lc-sort-text-enhanced">Descending</span>
-            </button>
-          </div>
-
-          {/* Repo Selector Button */}
-          <button
-            className={`lc-repo-toggle-enhanced ${showRepoInput ? 'lc-active-enhanced' : ''}`}
-            onClick={() => setShowRepoInput(!showRepoInput)}
-            aria-label="Toggle repository settings"
-          >
-            <FiChevronDown 
-              className={`lc-chevron-enhanced ${showRepoInput ? 'lc-rotated-enhanced' : ''}`} 
-              size={18} 
-            />
-            <span className="lc-repo-tooltip-enhanced">Repository</span>
-          </button>
-        </div>
+        {/* Sort Section - Desktop */}
+        
       </div>
 
       {/* Repo Input Dropdown */}
