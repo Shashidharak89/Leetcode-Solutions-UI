@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLeetCode } from '../context/LeetcodeContext';
 import { FiChevronDown } from 'react-icons/fi';
 import './styles/Controls.css';
@@ -13,11 +13,20 @@ const Controls = () => {
 
   const [showRepoInput, setShowRepoInput] = useState(false);
   const [repoInput, setRepoInput] = useState("");
+  const [error, setError] = useState("");
+
+  // 🔧 Load existing repo when dropdown opens
+  useEffect(() => {
+    if (showRepoInput) {
+      const savedRepo = localStorage.getItem("repo") || "";
+      setRepoInput(savedRepo);
+      setError("");
+    }
+  }, [showRepoInput]);
 
   // 🔧 Normalize repo input
   const normalizeRepo = (input) => {
     try {
-      // If full GitHub URL
       if (input.includes("github.com")) {
         const parts = input
           .replace("https://", "")
@@ -26,7 +35,6 @@ const Controls = () => {
           .split("/");
         return `${parts[1]}/${parts[2].replace(/\.git$/, "")}`;
       }
-      // If directly owner/repo
       return input.replace(/\.git$/, "");
     } catch {
       return input;
@@ -34,11 +42,15 @@ const Controls = () => {
   };
 
   const handleRepoSubmit = () => {
-    if (!repoInput.trim()) return;
+    if (!repoInput.trim()) {
+      setError("⚠️ Please enter a valid repo (owner/repo).");
+      return;
+    }
+
     const normalized = normalizeRepo(repoInput.trim());
     localStorage.setItem("repo", normalized);
     alert(`✅ Repo saved: ${normalized}`);
-    setRepoInput("");
+    setError("");
     setShowRepoInput(false);
   };
 
@@ -83,6 +95,9 @@ const Controls = () => {
       {/* Repo Input Dropdown */}
       {showRepoInput && (
         <div className="leetcode-repo-dropdown">
+          <p className="leetcode-repo-instruction">
+            Enter your GitHub repo (e.g., <code>owner/repo</code>).
+          </p>
           <input
             type="text"
             placeholder="Enter GitHub repo (owner/repo)"
@@ -93,6 +108,7 @@ const Controls = () => {
           <button onClick={handleRepoSubmit} className="leetcode-repo-submit">
             Save
           </button>
+          {error && <p className="leetcode-repo-error">{error}</p>}
         </div>
       )}
     </div>

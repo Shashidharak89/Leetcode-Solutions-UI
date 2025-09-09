@@ -156,3 +156,16 @@
 .leetcode-repo-submit:hover {
   background: var(--leetcode-dark-orange);
 }
+
+.leetcode-repo-instruction {
+  font-size: 0.85rem;
+  color: var(--leetcode-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.leetcode-repo-error {
+  font-size: 0.8rem;
+  color: red;
+  margin-top: 0.5rem;
+}
+
