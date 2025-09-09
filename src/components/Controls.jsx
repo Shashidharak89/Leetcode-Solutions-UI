@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLeetCode } from '../context/LeetcodeContext';
-import { FiChevronDown, FiSearch } from 'react-icons/fi';
+import { FiChevronDown, FiSearch, FiTrash2, FiSave } from 'react-icons/fi';
 import './styles/Controls.css';
 
 const Controls = () => {
@@ -9,18 +9,21 @@ const Controls = () => {
     sortOrder, 
     handleSearchChange, 
     handleSortChange,
-    theme = 'light' // assuming theme comes from context
+    theme = 'light'
   } = useLeetCode();
 
   const [showRepoInput, setShowRepoInput] = useState(false);
   const [repoInput, setRepoInput] = useState("");
+  const [currentRepo, setCurrentRepo] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  // Load existing repo when dropdown opens
+  // Load existing repo when component mounts or dropdown opens
   useEffect(() => {
+    const savedRepo = localStorage.getItem("repo") || "";
+    setCurrentRepo(savedRepo);
     if (showRepoInput) {
-      const savedRepo = localStorage.getItem("repo") || "";
       setRepoInput(savedRepo);
       setError("");
     }
@@ -57,6 +60,7 @@ const Controls = () => {
 
     const normalized = normalizeRepo(repoInput.trim());
     localStorage.setItem("repo", normalized);
+    setCurrentRepo(normalized);
     
     setIsSubmitting(false);
     setShowRepoInput(false);
@@ -67,68 +71,95 @@ const Controls = () => {
     }, 200);
   };
 
+  const handleDeleteRepo = () => {
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDeleteRepo = () => {
+    localStorage.removeItem("repo");
+    setCurrentRepo("");
+    setRepoInput("");
+    setShowDeleteConfirm(false);
+    setShowRepoInput(false);
+    
+    // Success feedback
+    setTimeout(() => {
+      alert("🗑️ Repository removed successfully!");
+    }, 200);
+  };
+
+  const cancelDeleteRepo = () => {
+    setShowDeleteConfirm(false);
+  };
+
   return (
-    <div className={`lc-controls ${theme}`}>
-      <div className="lc-controls-main">
+    <div className={`lc-controls-enhanced ${theme}`}>
+      <div className="lc-controls-main-enhanced">
         {/* Search Section */}
-        <div className="lc-search-wrapper">
-          <div className="lc-search-container">
-            <FiSearch className="lc-search-icon" />
+        <div className="lc-search-wrapper-enhanced">
+          <div className="lc-search-container-enhanced">
+            <FiSearch className="lc-search-icon-enhanced" />
             <input
               type="text"
               placeholder="Search problems..."
               value={searchTerm}
               onChange={handleSearchChange}
-              className="lc-search-input"
+              className="lc-search-input-enhanced"
             />
           </div>
         </div>
 
         {/* Sort Section */}
-        <div className="lc-sort-wrapper">
-          <span className="lc-sort-label">Sort by:</span>
-          <div className="lc-sort-buttons">
+        <div className="lc-sort-wrapper-enhanced">
+          <span className="lc-sort-label-enhanced">Sort by:</span>
+          <div className="lc-sort-buttons-enhanced">
             <button
               onClick={() => handleSortChange('ascending')}
-              className={`lc-sort-btn ${sortOrder === 'ascending' ? 'lc-active' : ''}`}
+              className={`lc-sort-btn-enhanced ${sortOrder === 'ascending' ? 'lc-active-enhanced' : ''}`}
             >
-              <span className="lc-sort-arrow">↑</span>
-              Ascending
+              <span className="lc-sort-arrow-enhanced">↑</span>
+              <span className="lc-sort-text-enhanced">Ascending</span>
             </button>
             <button
               onClick={() => handleSortChange('descending')}
-              className={`lc-sort-btn ${sortOrder === 'descending' ? 'lc-active' : ''}`}
+              className={`lc-sort-btn-enhanced ${sortOrder === 'descending' ? 'lc-active-enhanced' : ''}`}
             >
-              <span className="lc-sort-arrow">↓</span>
-              Descending
+              <span className="lc-sort-arrow-enhanced">↓</span>
+              <span className="lc-sort-text-enhanced">Descending</span>
             </button>
           </div>
 
           {/* Repo Selector Button */}
           <button
-            className={`lc-repo-toggle ${showRepoInput ? 'lc-active' : ''}`}
+            className={`lc-repo-toggle-enhanced ${showRepoInput ? 'lc-active-enhanced' : ''}`}
             onClick={() => setShowRepoInput(!showRepoInput)}
             aria-label="Toggle repository settings"
           >
             <FiChevronDown 
-              className={`lc-chevron ${showRepoInput ? 'lc-rotated' : ''}`} 
+              className={`lc-chevron-enhanced ${showRepoInput ? 'lc-rotated-enhanced' : ''}`} 
               size={18} 
             />
+            <span className="lc-repo-tooltip-enhanced">Repository</span>
           </button>
         </div>
       </div>
 
       {/* Repo Input Dropdown */}
-      <div className={`lc-repo-dropdown ${showRepoInput ? 'lc-visible' : ''}`}>
-        <div className="lc-repo-content">
-          <div className="lc-repo-header">
-            <h4 className="lc-repo-title">GitHub Repository</h4>
-            <p className="lc-repo-subtitle">
+      <div className={`lc-repo-dropdown-enhanced ${showRepoInput ? 'lc-visible-enhanced' : ''}`}>
+        <div className="lc-repo-content-enhanced">
+          <div className="lc-repo-header-enhanced">
+            <h4 className="lc-repo-title-enhanced">GitHub Repository</h4>
+            <p className="lc-repo-subtitle-enhanced">
               Enter your repository in format: <code>owner/repo</code>
             </p>
+            {currentRepo && (
+              <p className="lc-current-repo-enhanced">
+                Current: <span className="lc-repo-name-enhanced">{currentRepo}</span>
+              </p>
+            )}
           </div>
           
-          <div className="lc-repo-input-group">
+          <div className="lc-repo-input-group-enhanced">
             <input
               type="text"
               placeholder="e.g., adarsh23/react"
@@ -137,25 +168,65 @@ const Controls = () => {
                 setRepoInput(e.target.value);
                 setError("");
               }}
-              className="lc-repo-input"
+              className="lc-repo-input-enhanced"
               disabled={isSubmitting}
             />
-            <button 
-              onClick={handleRepoSubmit} 
-              className={`lc-repo-submit ${isSubmitting ? 'lc-loading' : ''}`}
-              disabled={isSubmitting || !repoInput.trim()}
-            >
-              {isSubmitting ? (
-                <div className="lc-spinner"></div>
-              ) : (
-                'Save'
+            <div className="lc-repo-actions-enhanced">
+              <button 
+                onClick={handleRepoSubmit} 
+                className={`lc-repo-submit-enhanced ${isSubmitting ? 'lc-loading-enhanced' : ''}`}
+                disabled={isSubmitting || !repoInput.trim()}
+                title="Save repository"
+              >
+                {isSubmitting ? (
+                  <div className="lc-spinner-enhanced"></div>
+                ) : (
+                  <FiSave size={16} />
+                )}
+              </button>
+              
+              {currentRepo && (
+                <button 
+                  onClick={handleDeleteRepo}
+                  className="lc-repo-delete-enhanced"
+                  disabled={isSubmitting}
+                  title="Delete repository"
+                >
+                  <FiTrash2 size={16} />
+                </button>
               )}
-            </button>
+            </div>
           </div>
           
           {error && (
-            <div className="lc-error-message">
+            <div className="lc-error-message-enhanced">
               {error}
+            </div>
+          )}
+
+          {/* Delete Confirmation Modal */}
+          {showDeleteConfirm && (
+            <div className="lc-delete-overlay-enhanced">
+              <div className="lc-delete-modal-enhanced">
+                <h5 className="lc-delete-title-enhanced">Confirm Deletion</h5>
+                <p className="lc-delete-message-enhanced">
+                  Are you sure you want to remove the repository <strong>{currentRepo}</strong>?
+                </p>
+                <div className="lc-delete-actions-enhanced">
+                  <button 
+                    onClick={cancelDeleteRepo}
+                    className="lc-cancel-btn-enhanced"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    onClick={confirmDeleteRepo}
+                    className="lc-confirm-delete-btn-enhanced"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>
