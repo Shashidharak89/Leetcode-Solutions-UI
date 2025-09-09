@@ -16,13 +16,22 @@ export const LeetCodeProvider = ({ children }) => {
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [selectedSolution, setSelectedSolution] = useState(0);
   const [fileContent, setFileContent] = useState("");
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(() => {
+    // Load theme from localStorage, fallback to 'light'
+    return localStorage.getItem('theme') || 'light';
+  });
   const [fontSize, setFontSize] = useState(100);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('ascending');
+
+  // Persist theme to localStorage
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    document.body.setAttribute("data-theme", theme); // optional: for global styles
+  }, [theme]);
 
   // Filter and sort problems when dependencies change
   useEffect(() => {
@@ -63,7 +72,6 @@ export const LeetCodeProvider = ({ children }) => {
       
       const data = await res.json();
       
-      // Filter directories and sort them
       const dirs = data
         .filter(item => item.type === "dir")
         .sort((a, b) => {
