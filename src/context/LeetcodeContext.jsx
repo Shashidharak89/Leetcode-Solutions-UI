@@ -26,10 +26,13 @@ export const LeetCodeProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("ascending");
 
+  // ✅ Get repo from localStorage (fallback to default)
+  const repo = localStorage.getItem("repo") || "Shashidharak89/MY-LEETCODE-SOLUTIONS";
+
   // ✅ Persist theme
   useEffect(() => {
     localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme); // global attribute for CSS
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   // ✅ Auto filter + sort whenever data changes
@@ -60,7 +63,6 @@ export const LeetCodeProvider = ({ children }) => {
 
   // 📂 Fetch repo structure
   const fetchSolutions = async () => {
-    const repo = "Shashidharak89/MY-LEETCODE-SOLUTIONS";
     const url = `https://api.github.com/repos/${repo}/contents/`;
 
     try {
@@ -210,6 +212,7 @@ export const LeetCodeProvider = ({ children }) => {
     showModal,
     searchTerm,
     sortOrder,
+    repo, // ✅ expose repo to components if needed
 
     // Actions
     fetchSolutions,
