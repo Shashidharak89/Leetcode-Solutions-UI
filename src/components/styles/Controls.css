@@ -38,7 +38,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
 }
 
 .leetcode-sort-label {
@@ -56,9 +55,6 @@
   transition: all 0.3s ease;
   font-size: 0.875rem;
   color: var(--leetcode-text-primary);
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
 }
 
 .leetcode-sort-btn:hover {
@@ -85,21 +81,78 @@
     align-items: stretch;
     gap: 1rem;
   }
-
+  
   .leetcode-search-container {
     max-width: none;
   }
-
+  
   .leetcode-sort-container {
     justify-content: center;
-    flex-wrap: wrap;
   }
-
+  
   .leetcode-sort-btn {
     padding: 0.5rem 0.75rem;
     font-size: 0.8rem;
-    flex: 1;
-    min-width: 100px;
-    justify-content: center;
   }
+}
+
+/* Repo Selector */
+.leetcode-repo-btn {
+  background: var(--leetcode-bg-primary);
+  border: 1px solid var(--leetcode-border);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--leetcode-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leetcode-repo-btn:hover {
+  background: var(--leetcode-light-orange);
+  color: white;
+  border-color: var(--leetcode-primary-orange);
+}
+
+.leetcode-repo-dropdown {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.leetcode-repo-input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--leetcode-border);
+  border-radius: 8px;
+  background: var(--leetcode-bg-primary);
+  color: var(--leetcode-text-primary);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.leetcode-repo-input:focus {
+  outline: none;
+  border-color: var(--leetcode-primary-orange);
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+}
+
+.leetcode-repo-submit {
+  background: var(--leetcode-primary-orange);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.leetcode-repo-submit:hover {
+  background: var(--leetcode-dark-orange);
 }
