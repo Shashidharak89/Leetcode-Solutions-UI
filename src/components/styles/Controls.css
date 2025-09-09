@@ -38,6 +38,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .leetcode-sort-label {
@@ -55,6 +56,9 @@
   transition: all 0.3s ease;
   font-size: 0.875rem;
   color: var(--leetcode-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .leetcode-sort-btn:hover {
@@ -81,17 +85,21 @@
     align-items: stretch;
     gap: 1rem;
   }
-  
+
   .leetcode-search-container {
     max-width: none;
   }
-  
+
   .leetcode-sort-container {
     justify-content: center;
+    flex-wrap: wrap;
   }
-  
+
   .leetcode-sort-btn {
     padding: 0.5rem 0.75rem;
     font-size: 0.8rem;
+    flex: 1;
+    min-width: 100px;
+    justify-content: center;
   }
 }
